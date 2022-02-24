@@ -1,22 +1,21 @@
--- create pysports_user and grant them all privileges to the pysports database 
+-- create pysports_user and grant them privs to the pysports database 
 CREATE USER 'pysports_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'MySQL8IsGreat!';
 
--- grant all privileges to the pysports database to user pysports_user on localhost 
+-- grant privs to pysports database to user pysports_user on localhost 
 GRANT ALL PRIVILEGES ON pysports.* TO'pysports_user'@'localhost';
 
--- drop tables if they are present
+-- drop tables if present
 DROP TABLE IF EXISTS player;
 DROP TABLE IF EXISTS team;
 
--- create the team table 
+-- create team table 
 CREATE TABLE team (
     team_id     INT             NOT NULL        AUTO_INCREMENT,
     team_name   VARCHAR(75)     NOT NULL,
     mascot      VARCHAR(75)     NOT NULL,
     PRIMARY KEY(team_id)
 ); 
-
--- create the player table and set the foreign key
+-- create player table and set foreign key
 CREATE TABLE player (
     player_id   INT             NOT NULL        AUTO_INCREMENT,
     first_name  VARCHAR(75)     NOT NULL,
@@ -28,14 +27,12 @@ CREATE TABLE player (
         REFERENCES team(team_id)
 );
 
-
 -- insert team records
 INSERT INTO team(team_name, mascot)
     VALUES('Team Gandalf', 'White Wizards');
 
 INSERT INTO team(team_name, mascot)
     VALUES('Team Sauron', 'Orcs');
-
 
 -- insert player records 
 INSERT INTO player(first_name, last_name, team_id) 
